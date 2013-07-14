@@ -1,0 +1,6 @@
+<p id="modaladd">Add item</p> <!-- clicky! -->
+<ul class="item-actions">
+	<% _.each(models, function(action){ %>
+		<li><%= action.get("text") %></li> 
+	<% }); %>
+</ul>
