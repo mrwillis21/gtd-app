@@ -4,14 +4,6 @@
 		<input id="action-input" type="text" placeholder="Add Action"/>
 		<button id="action-add" type="button" class="btn">Add</button>
 	</div>
-	<ul class="entry-actions">
-		<% _.each(models, function(action){ %>
-			<li class="ui-action">
-				<label class="checkbox">
-					<input class="action-check" type="checkbox" />
-					<span<% if(action.get("complete")) { %> class="complete"<% } %>><%= action.get("text") %></span>
-				</label>
-			</li> 
-		<% }); %>
+	<ul id="entry-actions">
 	</ul>
 </div>

@@ -7,7 +7,7 @@ define([
 	"views/inbox/entry-action-list",
 	"text!/templates/inbox/entry.html",
 	"text!/templates/inbox/entry-modal.html"],
-	function($, Bootstrap, _, Backbone, Actions, ActionView, entryTemplate, modalTemplate) {
+	function($, Bootstrap, _, Backbone, Actions, ActionListView, entryTemplate, modalTemplate) {
 		return Backbone.View.extend({
 			tagName: "li",
 			className: "ui-entry",
@@ -31,7 +31,7 @@ define([
 				var modal = this.jqModal;
 				var modalBodyEl = this.jqModalBody;
 
-				var actionView = new ActionView({el: modalBodyEl, collection: this.actions});
+				var actionView = new ActionListView({el: modalBodyEl, collection: this.actions});
 				actionView.render();
 
 				modal.on('hidden', function() {

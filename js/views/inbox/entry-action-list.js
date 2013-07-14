@@ -3,8 +3,9 @@ define([
 	"underscore",
 	"backbone",
 	"models/action",
+	"views/inbox/action",
 	"text!/templates/inbox/entry-action-list.html"],
-	function($, _, Backbone, Action, actionsTemplate) {
+	function($, _, Backbone, Action, ActionView, actionsTemplate) {
 		return Backbone.View.extend({
 			initialize: function() {
 				_.bindAll(this, "render");
@@ -16,6 +17,13 @@ define([
 			render: function() {
 				var compiledTemplate = _.template(actionsTemplate, this.collection);
 				this.$el.html(compiledTemplate);
+
+				var actionListEl = $("#entry-actions");
+				var actionView;
+				_.each(this.collection.models, function(action){
+					actionView = new ActionView({model: action});
+					actionListEl.append(actionView.render().el);
+				});
 				return this;
 			},
 			addAction: function() {
@@ -26,10 +34,6 @@ define([
 					var action = new Action({text: inputText});
 					this.collection.add(action);
 				}
-			},
-			checkAction: function() {
-				// TODO: Implement a new view for entry-action, and add click toggle for checkbox.
-				// var checked = actionChecked.is(":checked");
 			}
 		});
 	}

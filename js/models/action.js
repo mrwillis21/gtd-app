@@ -5,7 +5,8 @@ define([
 		return Backbone.Model.extend({
 			defaults: {
 				text: "",
-				complete: false
+				complete: false,
+				rank: 0
 			}
 		});
 	}
