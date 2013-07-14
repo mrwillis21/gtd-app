@@ -12,7 +12,8 @@ define([
 				this.collection.on("add remove", this.render);
 			},
 			events: {
-				"click #entry-action-list #action-add": "addAction"
+				"click #entry-action-list #action-add": "addAction",
+				"submit": "addAction"
 			},
 			render: function() {
 				var compiledTemplate = _.template(actionsTemplate, this.collection);
@@ -24,9 +25,11 @@ define([
 					actionView = new ActionView({model: action});
 					actionListEl.append(actionView.render().el);
 				});
+				$("#entry-action-list #action-input").focus();
 				return this;
 			},
-			addAction: function() {
+			addAction: function(e) {
+				e.preventDefault();
 				var inputBox = $("#entry-action-list #action-input");
 				var inputText = inputBox.val();
 				if(inputText) {

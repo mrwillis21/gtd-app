@@ -13,7 +13,8 @@ define([
 				this.entries = new Entries(); // Load this from elsewhere once persistence is built.
 			},
 			events: {
-				"click #inbox #entry-add": "addItem"
+				"click #inbox #entry-add": "addItem",
+				"submit": "addItem"
 			},
 			render: function() {
 				this.$el.html(inboxTemplate);
@@ -23,13 +24,15 @@ define([
 				}).render();
 				return this;
 			},
-			addItem: function() {
+			addItem: function(e) {
+				e.preventDefault();
 				var inputBox = $("#inbox #entry-input");
 				var inputText = inputBox.val();
 				if(inputText) {
 					inputBox.val("");
 					var entry = new Entry({text: inputText});
 					this.entries.add(entry); // Make this toggle-able - desc/asc
+					$("#inbox #entry-input").focus();
 				}
 			}
 		});

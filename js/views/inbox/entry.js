@@ -31,8 +31,8 @@ define([
 				var modal = this.jqModal;
 				var modalBodyEl = this.jqModalBody;
 
-				var actionView = new ActionListView({el: modalBodyEl, collection: this.actions});
-				actionView.render();
+				var actionListView = new ActionListView({el: modalBodyEl, collection: this.actions});
+				actionListView.render();
 
 				modal.on('hidden', function() {
 					modal.remove();
