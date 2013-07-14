@@ -1,6 +1,17 @@
-<p id="modaladd">Add item</p> <!-- clicky! -->
-<ul class="item-actions">
-	<% _.each(models, function(action){ %>
-		<li><%= action.get("text") %></li> 
-	<% }); %>
-</ul>
+<div id="entry-action-list">
+	<h4>Actions (<%= length %>)</h3>
+	<div class="input-append">
+		<input id="action-input" type="text" placeholder="Add Action"/>
+		<button id="action-add" type="button" class="btn">Add</button>
+	</div>
+	<ul class="entry-actions">
+		<% _.each(models, function(action){ %>
+			<li class="ui-action">
+				<label class="checkbox">
+					<input class="action-check" type="checkbox" />
+					<span<% if(action.get("complete")) { %> class="complete"<% } %>><%= action.get("text") %></span>
+				</label>
+			</li> 
+		<% }); %>
+	</ul>
+</div>

@@ -14,11 +14,10 @@ define([
 			render: function() {
 				this.$el.html("");
 				var entryView, entry;
-				for(var i = 0; i < this.collection.length; i++) {
-					entry = this.collection.at(i);
+				_.each(this.collection.models, function(entry) {
 					entryView = new EntryView({ model: entry });
 					this.$el.append(entryView.render().el);
-				}
+				}, this);
 				return this;
 			}
 		});

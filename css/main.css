@@ -13,3 +13,7 @@ body {
 	margin: 10px 0;
 	list-style: none;
 }
+.ui-action .complete {
+	text-decoration: line-through;
+	color: #CCCCCC;
+}

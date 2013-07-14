@@ -4,7 +4,8 @@ define([
 	function(_, Backbone) {
 		return Backbone.Model.extend({
 			defaults: {
-				text: ""
+				text: "",
+				complete: false
 			}
 		});
 	}

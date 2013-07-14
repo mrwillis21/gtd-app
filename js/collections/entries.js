@@ -6,5 +6,6 @@ define([
 		return Backbone.Collection.extend({
 			model: Entry
 		});
+		// TODO: Add a comparator to order by "rank".
 	}
 );

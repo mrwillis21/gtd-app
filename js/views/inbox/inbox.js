@@ -8,10 +8,12 @@ define([
 	"text!/templates/inbox/inbox.html"],
 	function($, _, Backbone, Entry, Entries, ListView, inboxTemplate) {
 		return Backbone.View.extend({
-			entries: new Entries(),// Load this from elsewhere once persistence is built.
 			el: $("#app"),
+			initialize: function() {
+				this.entries = new Entries(); // Load this from elsewhere once persistence is built.
+			},
 			events: {
-				"click #inbox #add-button": "addItem"
+				"click #inbox #entry-add": "addItem"
 			},
 			render: function() {
 				this.$el.html(inboxTemplate);
@@ -22,7 +24,7 @@ define([
 				return this;
 			},
 			addItem: function() {
-				var inputBox = $("#input-text");
+				var inputBox = $("#inbox #entry-input");
 				var inputText = inputBox.val();
 				if(inputText) {
 					inputBox.val("");
