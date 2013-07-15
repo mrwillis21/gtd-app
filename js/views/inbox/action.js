@@ -12,7 +12,12 @@ define([
 				_.bindAll(this, "render");
 				this.model.on("change", function() {
 					var span = this.$el.find("span");
-					(this.model.get("complete")) ? span.addClass("complete") : span.removeClass("complete");
+					if(this.model.get("complete")) {
+						span.addClass("complete");
+					}
+					else {
+						span.removeClass("complete");
+					}
 					// TODO: Move to the bottom of the list.
 				}, this);
 			},

@@ -34,7 +34,7 @@ define([
 				var inputText = inputBox.val();
 				if(inputText) {
 					inputBox.val("");
-					var action = new Action({text: inputText});
+					var action = new Action({text: inputText, rank: this.collection.length});
 					this.collection.add(action);
 				}
 			}
