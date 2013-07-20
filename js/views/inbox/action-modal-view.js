@@ -25,8 +25,9 @@ define([
 			addAction: function(e) {
 				e.preventDefault();
 				var inputText = this.inputBox.val();
+				var parentId = this.model.id;
 				if(inputText) {
-					this.actions.create({text: inputText, rank: this.actions.length});
+					this.actions.create({entryId: parentId, text: inputText, rank: this.actions.length});
 					this.inputBox.val("").focus();
 				}
 			}

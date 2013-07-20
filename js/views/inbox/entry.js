@@ -26,15 +26,14 @@ define([
 				return this;
 			},
 			openItem: function() {
-				var modal = this.jqModal;
-				var modalBodyEl = this.jqModalBody;
+				var self = this;
 
-				new ActionModalView({el: modalBodyEl}).render();
+				new ActionModalView({ el: self.jqModalBody, model: self.model }).render();
 
+				var modal = self.jqModal;
 				modal.on('hidden', function() {
 					modal.remove();
 				});
-
 				modal.modal();
 			}
 		});
