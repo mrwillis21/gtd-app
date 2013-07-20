@@ -2,10 +2,10 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"collections/entries",
-	"views/inbox/entry-list",
-	"text!/templates/inbox/inbox.html"],
-	function($, _, Backbone, Entries, EntryListView, inboxTemplate) {
+	"collections/entry-collection",
+	"views/inbox/entry-list-view",
+	"text!/templates/inbox/inbox-view-tpl.html"],
+	function($, _, Backbone, EntryCollection, EntryListView, inboxViewTemplate) {
 		return Backbone.View.extend({
 			el: $("#app"),
 			events: {
@@ -13,11 +13,11 @@ define([
 				"submit #entry-form": "addItem"
 			},
 			initialize: function() {
-				this.entries = new Entries();
+				this.entries = new EntryCollection();
 				this.entries.fetch();
 			},
 			render: function() {
-				this.$el.html(inboxTemplate);
+				this.$el.html(inboxViewTemplate);
 				this.inputBox = this.$("#entry-form #entry-input");
 				new EntryListView({
 					el: $("#entries"),

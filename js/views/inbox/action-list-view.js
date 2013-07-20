@@ -3,9 +3,8 @@ define([
 	"jquery-ui",
 	"underscore",
 	"backbone",
-	"collections/actions",
-	"views/inbox/action"],
-	function($, jqUI, _, Backbone, Actions, ActionView) {
+	"views/inbox/action-view"],
+	function($, jqUI, _, Backbone, ActionView) {
 		return Backbone.View.extend({
 			initialize: function() {
 				_.bindAll(this, "render");

@@ -2,9 +2,8 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"collections/entries",
-	"views/inbox/entry"],
-	function($, _, Backbone, Entries, EntryView) {
+	"views/inbox/entry-view"],
+	function($, _, Backbone, EntryView) {
 		return Backbone.View.extend({
 			initialize: function() {
 				_.bindAll(this, "render");

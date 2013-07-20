@@ -3,8 +3,8 @@ define([
 	"bootstrap",
 	"underscore",
 	"backbone",
-	"text!/templates/inbox/action.html"],
-	function($, Bootstrap, _, Backbone, actionTemplate) {
+	"text!/templates/inbox/action-view-tpl.html"],
+	function($, Bootstrap, _, Backbone, actionViewTemplate) {
 		return Backbone.View.extend({
 			tagName: "li",
 			className: "ui-action",
@@ -16,7 +16,7 @@ define([
 				"click .action-check": "toggleComplete"
 			},
 			render: function() {
-				var compiledTemplate = _.template(actionTemplate, this.model);
+				var compiledTemplate = _.template(actionViewTemplate, this.model);
 				this.$el.html(compiledTemplate);
 				var complete = this.model.get("complete");
 				this.$(".action-text").toggleClass("complete", complete);

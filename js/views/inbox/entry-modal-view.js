@@ -2,18 +2,18 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"collections/actions",
-	"views/inbox/entry-action-list"],
-	function($, _, Backbone, Actions, ActionListView) {
+	"collections/action-collection",
+	"views/inbox/action-list-view"],
+	function($, _, Backbone, ActionCollection, ActionListView) {
 		return Backbone.View.extend({
 			initialize: function() {
 				this.inputBox = this.$("#action-form #action-input");
-				var allActions = new Actions();
+				var allActions = new ActionCollection();
 				allActions.fetch();
 				var id = this.model.id;
 
 				// FIXME: Filtering in memory sucks, but this will get fixed once I switch to a proper backend.
-				this.actions = new Actions(allActions.where({entryId: id}));
+				this.actions = new ActionCollection(allActions.where({entryId: id}));
 				this.listenTo(this.actions, "add remove change:complete", this.updateProgress, this);
 			},
 			events: {
