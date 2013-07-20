@@ -1,10 +1,13 @@
 define([
 	"underscore",
 	"backbone",
-	"models/entry"],
-	function(_, Backbone, Entry) {
-		return Backbone.Collection.extend({
-			model: Entry
+	"models/action"],
+	function(_, Backbone, Action) {
+		var Actions = Backbone.Collection.extend({
+			model: Action,
+			localStorage: new Backbone.LocalStorage("GTD_Actions")
 		});
+
+		return Actions;
 	}
 );

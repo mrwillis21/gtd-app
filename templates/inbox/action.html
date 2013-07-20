@@ -1,4 +1,9 @@
-<label class="checkbox">
-	<input class="action-check" type="checkbox" />
-	<span<% if(complete) { %> class="complete"<% } %>><%= text %></span>
-</label>
+<div class="form-inline">
+	<label class="action-label">
+		<input class="action-check" type="checkbox" />
+		<span><%= get("text") %></span>
+	</label>
+	<span class="action-context label">
+		Context
+	</span>
+</div>

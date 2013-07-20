@@ -5,22 +5,24 @@ define([
 	"collections/entries",
 	"views/inbox/entry-list",
 	"text!/templates/inbox/inbox.html"],
-	function($, _, Backbone, Entries, ListView, inboxTemplate) {
+	function($, _, Backbone, Entries, EntryListView, inboxTemplate) {
 		return Backbone.View.extend({
 			el: $("#app"),
+			events: {
+				"click #entry-form #entry-add": "addItem",
+				"submit #entry-form": "addItem"
+			},
 			initialize: function() {
-				this.$el.html(inboxTemplate);
-				this.inputBox = this.$("#entry-input");
 				this.entries = new Entries();
 				this.entries.fetch();
-				new ListView({
+			},
+			render: function() {
+				this.$el.html(inboxTemplate);
+				this.inputBox = this.$("#entry-form #entry-input");
+				new EntryListView({
 					el: $("#entries"),
 					collection: this.entries
 				}).render();
-			},
-			events: {
-				"click #inbox #entry-add": "addItem",
-				"submit": "addItem"
 			},
 			addItem: function(e) {
 				e.preventDefault();

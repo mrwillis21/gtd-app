@@ -6,7 +6,22 @@ define([
 			defaults: {
 				text: "",
 				complete: false,
-				rank: 0
+				context: "",
+				rank: 0,
+				entryId: ""
+			},
+
+			getContext: function() {
+				var ret;
+				var c = this.get("context");
+				if(c) {
+					ret = "";
+					if(c.charAt(0) != "@") {
+						ret = "@";
+					}
+					ret += c;
+				}
+				return ret;
 			}
 		});
 	}

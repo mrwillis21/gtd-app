@@ -4,10 +4,10 @@ define([
 	"underscore",
 	"backbone",
 	"collections/actions",
-	"views/inbox/entry-action-list",
+	"views/inbox/action-modal-view",
 	"text!/templates/inbox/entry.html",
 	"text!/templates/inbox/entry-modal.html"],
-	function($, Bootstrap, _, Backbone, Actions, ActionListView, entryTemplate, modalTemplate) {
+	function($, Bootstrap, _, Backbone, Actions, ActionModalView, entryTemplate, modalTemplate) {
 		return Backbone.View.extend({
 			tagName: "li",
 			className: "ui-entry",
@@ -16,10 +16,8 @@ define([
 			},
 			initialize: function() {
 				_.bindAll(this, "render");
-
-				this.actions = new Actions(); // Load this from elsewhere once persistence is built.
-
 				this.jqModal = $(_.template(modalTemplate, this.model.toJSON()));
+				this.inputBox = this.jqModal.find("#action-input");
 				this.jqModalBody = this.jqModal.find(".modal-body");
 			},
 			render: function() {
@@ -31,8 +29,7 @@ define([
 				var modal = this.jqModal;
 				var modalBodyEl = this.jqModalBody;
 
-				var actionListView = new ActionListView({el: modalBodyEl, collection: this.actions});
-				actionListView.render();
+				new ActionModalView({el: modalBodyEl}).render();
 
 				modal.on('hidden', function() {
 					modal.remove();

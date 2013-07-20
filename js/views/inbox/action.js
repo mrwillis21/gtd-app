@@ -10,26 +10,20 @@ define([
 			className: "ui-action",
 			initialize: function() {
 				_.bindAll(this, "render");
-				this.model.on("change", function() {
-					var span = this.$el.find("span");
-					if(this.model.get("complete")) {
-						span.addClass("complete");
-					}
-					else {
-						span.removeClass("complete");
-					}
+				this.model.on("change", function(model) {
+					this.$(".action-label").toggleClass("complete", model.get("complete"));
 					// TODO: Move to the bottom of the list.
 				}, this);
 			},
 			events: {
-				"click .action-check": "checkAction"
+				"click .action-check": "toggleComplete"
 			},
 			render: function() {
-				var compiledTemplate = _.template(actionTemplate, this.model.toJSON());
+				var compiledTemplate = _.template(actionTemplate, this.model);
 				this.$el.html(compiledTemplate);
 				return this;
 			},
-			checkAction: function(e) {
+			toggleComplete: function(e) {
 				var checked = $(e.target).is(":checked");
 				this.model.set("complete", checked);
 			}
