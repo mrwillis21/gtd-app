@@ -2,37 +2,32 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"models/entry",
 	"collections/entries",
 	"views/inbox/entry-list",
 	"text!/templates/inbox/inbox.html"],
-	function($, _, Backbone, Entry, Entries, ListView, inboxTemplate) {
+	function($, _, Backbone, Entries, ListView, inboxTemplate) {
 		return Backbone.View.extend({
 			el: $("#app"),
 			initialize: function() {
-				this.entries = new Entries(); // Load this from elsewhere once persistence is built.
+				this.$el.html(inboxTemplate);
+				this.inputBox = this.$("#entry-input");
+				this.entries = new Entries();
+				this.entries.fetch();
+				new ListView({
+					el: $("#entries"),
+					collection: this.entries
+				}).render();
 			},
 			events: {
 				"click #inbox #entry-add": "addItem",
 				"submit": "addItem"
 			},
-			render: function() {
-				this.$el.html(inboxTemplate);
-				new ListView({
-					el: $("#entries"),
-					collection: this.entries
-				}).render();
-				return this;
-			},
 			addItem: function(e) {
 				e.preventDefault();
-				var inputBox = $("#inbox #entry-input");
-				var inputText = inputBox.val();
+				var inputText = this.inputBox.val();
 				if(inputText) {
-					inputBox.val("");
-					var entry = new Entry({text: inputText});
-					this.entries.add(entry); // Make this toggle-able - desc/asc
-					$("#inbox #entry-input").focus();
+					this.entries.create({text: inputText}); // Make this toggle-able - desc/asc
+					this.inputBox.val("").focus();
 				}
 			}
 		});

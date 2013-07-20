@@ -4,6 +4,7 @@ require.config({
 		"jquery": "lib/jquery-2.0.3.min",
 		"underscore": "lib/underscore-min",
 		"backbone": "lib/backbone-min",
+		"backbone-localstorage": "lib/backbone.localStorage-min",
 		"bootstrap": "lib/bootstrap"
 	},
 	shim: {

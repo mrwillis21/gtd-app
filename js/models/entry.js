@@ -2,10 +2,13 @@ define([
 	"underscore",
 	"backbone"],
 	function(_, Backbone) {
-		return Backbone.Model.extend({
+		var Entry = Backbone.Model.extend({
 			defaults: {
-				text: ""
+				text: "",
+				listId: ""
 			}
 		});
+
+		return Entry;
 	}
 );
