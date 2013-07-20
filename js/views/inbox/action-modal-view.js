@@ -14,6 +14,8 @@ define([
 
 				// FIXME: Filtering in memory sucks, but this will get fixed once I switch to a proper backend.
 				this.actions = new Actions(allActions.where({entryId: id}));
+				this.listenTo(this.actions, "add remove change:complete", this.updateProgress, this);
+				this.listenTo(this, "render", this.updateProgress);
 			},
 			events: {
 				"click #action-form #action-add": "addAction",
@@ -35,6 +37,10 @@ define([
 					this.actions.create({entryId: parentId, text: inputText, rank: this.actions.length});
 					this.inputBox.val("").focus();
 				}
+			},
+			updateProgress: function() {
+				var pct = Math.floor((this.actions.where({complete: true}).length / this.actions.length) * 100);
+				this.$(".progress .bar").width(pct + "%");
 			},
 			deleteEntry: function(e) {
 				e.preventDefault();
