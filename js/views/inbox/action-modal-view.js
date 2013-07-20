@@ -8,8 +8,12 @@ define([
 		return Backbone.View.extend({
 			initialize: function() {
 				this.inputBox = this.$("#action-form #action-input");
-				this.actions = new Actions();
-				// this.actions.fetch();
+				var allActions = new Actions();
+				allActions.fetch();
+				var id = this.model.id;
+
+				// FIXME: Filtering in memory sucks, but this will get fixed once I switch to a proper backend.
+				this.actions = new Actions(allActions.where({entryId: id}));
 			},
 			events: {
 				"click #action-form #action-add": "addAction",
