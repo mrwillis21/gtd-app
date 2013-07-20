@@ -16,6 +16,8 @@ define([
 
 				var actions = this.collection;
 				this.$el.sortable({
+					axis: "y",
+					forcePlaceholderSize: true,
 					update: function(e, ui) {
 						var listIds = $(this).sortable("toArray");
 						_.each(listIds, function(listId, index) {
