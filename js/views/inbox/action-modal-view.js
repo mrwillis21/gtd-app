@@ -17,7 +17,8 @@ define([
 			},
 			events: {
 				"click #action-form #action-add": "addAction",
-				"submit #action-form": "addAction"
+				"submit #action-form": "addAction",
+				"click #entry-operations #delete-link": "deleteEntry"
 			},
 			render: function() {
 				var listEl = this.$("#entry-actions");
@@ -34,6 +35,16 @@ define([
 					this.actions.create({entryId: parentId, text: inputText, rank: this.actions.length});
 					this.inputBox.val("").focus();
 				}
+			},
+			deleteEntry: function(e) {
+				e.preventDefault();
+				// TODO: Show a confirmation.
+				var action;
+				for(action = this.actions.first(); action; action = this.actions.first()) {
+					action.destroy();
+				}
+				this.model.destroy();
+				$("#entryModal").modal('hide');
 			}
 		});
 	}
