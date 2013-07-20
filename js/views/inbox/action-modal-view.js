@@ -15,7 +15,6 @@ define([
 				// FIXME: Filtering in memory sucks, but this will get fixed once I switch to a proper backend.
 				this.actions = new Actions(allActions.where({entryId: id}));
 				this.listenTo(this.actions, "add remove change:complete", this.updateProgress, this);
-				this.listenTo(this, "render", this.updateProgress);
 			},
 			events: {
 				"click #action-form #action-add": "addAction",
@@ -28,6 +27,7 @@ define([
 					el: listEl,
 					collection: this.actions
 				}).render();
+				this.updateProgress();
 			},
 			addAction: function(e) {
 				e.preventDefault();
