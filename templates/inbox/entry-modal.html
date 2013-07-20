@@ -4,12 +4,16 @@
 		<h3 id="entryModalHeader"><%= text %></h3>
 	</div>
 	<div class="modal-body">
+		<ul id="entry-operations" class="unstyled pull-right">
+			<li><i class="icon-trash"></i> Delete</li>
+		</ul>
+		
 		<h4>Actions</h4>
 		<form id="action-form" class="input-append">
 			<input id="action-input" type="text" placeholder="Add Action"/>
 			<button id="action-add" type="submit" class="btn">Add</button>
 		</form>
-		<ul id="entry-actions">
+		<ul id="entry-actions" class="unstyled">
 		</ul>
 	</div>
 	<div class="modal-footer">
