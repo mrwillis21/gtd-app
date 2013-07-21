@@ -8,41 +8,41 @@ define([
 	function($, _, Backbone, EntryCollection, ActionCollection, nextActionsViewTemplate) {
 		return Backbone.View.extend({
 			el: $("#app"),
-			initialize: function() {
-				var actions = new ActionCollection();
-				actions.fetch();
-
-				var entries = new EntryCollection();
-				entries.fetch();
-
-				this.actions = new ActionCollection(this.getNextActions(entries, actions));
-			},
 			render: function() {
 				this.$el.html(nextActionsViewTemplate);
-				_.each(this.actions.models, function(action) {
+				var nextActions = this.getNextActions();
+				_.each(nextActions, function(action) {
 					this.$el.append("<li>" + action.get("text") + "</li>");
 				}, this);
 			},
-			getNextActions: function(allEntries, allActions) {
+			getNextActions: function() {
 				// This complicated in-memory query will be replaced by proper backend calls, but for now...
-				var incompleteActions = allActions.where({"complete": false});
+				var nextActions = [];
 
+				var allActions = new ActionCollection();
+				allActions.fetch();
+
+				var incompleteActions = allActions.where({"complete": false});
 				function groupActionsByEntry(a) {
 					return a.get("entryId");
 				}
 				var actionGroups = _.groupBy(incompleteActions, groupActionsByEntry);
 
+				var sortedActions;
+				var actionsForEntry;
 				function sortActions(a) {
 					return a.get("rank");
 				}
-				var sortedActions;
-				var nextActions = [];
 				function populateNextActionForEntry(entry) {
-					if(actionGroups[entry.id]) {
-						sortedActions = _.sortBy(actionGroups[entry.id], sortActions);
+					actionsForEntry = actionGroups[entry.id];
+					if(actionsForEntry) {
+						sortedActions = _.sortBy(actionsForEntry, sortActions);
 						nextActions.push(sortedActions[0]);
 					}
 				}
+
+				var allEntries = new EntryCollection();
+				allEntries.fetch();
 
 				allEntries.each(populateNextActionForEntry);
 
