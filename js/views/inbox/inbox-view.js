@@ -28,7 +28,8 @@ define([
 				e.preventDefault();
 				var inputText = this.inputBox.val();
 				if(inputText) {
-					this.entries.create({text: inputText}); // Make this toggle-able - desc/asc
+					// TODO: Later we're going to want to let the server set the created timestamp.
+					this.entries.create({text: inputText, created: new Date().getTime() }); // Make this toggle-able - desc/asc
 					this.inputBox.val("").focus();
 				}
 			}

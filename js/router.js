@@ -2,8 +2,9 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"views/inbox/inbox-view"],
-	function($, _, Backbone, InboxView) {
+	"views/inbox/inbox-view",
+	"views/next-actions/next-actions-view"],
+	function($, _, Backbone, InboxView, NextActionsView) {
 		var AppRouter = Backbone.Router.extend({
 			routes: {
 				"": "showInbox",
@@ -16,7 +17,7 @@ define([
 			},
 
 			showNextActions: function() {
-				console.log("Next Actions");
+				new NextActionsView().render();
 			}
 		});
 
